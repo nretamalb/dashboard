@@ -1,19 +1,21 @@
 //(function () {
 //const Chart = require("chart.js");
 const apiKey = "S51VRFL8QHM1UAN7";
-let urlFunction = "TIME_SERIES_INTRADAY";
+let urlFunction = "TIME_SERIES_DAILY";
 let urlSymbol = "IBM";
 let timeInterval = "1min";
-const url =
-  "https://www.alphavantage.co/query?function=" +
-  urlFunction +
-  "&symbol=" +
-  urlSymbol +
-  "&interval=" +
-  timeInterval +
-  "&slice=year1month1&apikey=" +
-  apiKey;
+// const url =
+//   urlFunction +
+//   "&symbol=" +
+//   urlSymbol +
+//   // "&interval=" +
+//   //timeInterval +
+//   //"&slice=year1month1
+//   "&apikey=" +
+//   apiKey;
 
+let url =
+  "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=S51VRFL8QHM1UAN7";
 let button = document.querySelector("#myButton");
 
 const get = (url) => {
@@ -28,58 +30,51 @@ const get = (url) => {
       })
   );
 };
+
+let stockDates = [];
+let closePrice = [];
+
 const getStock = async () => {
   await get(url).then((data) => {
     console.log(data);
-    const stock = Object.values(data)[1];
-    console.log(`stock: ${stock}`);
-    const stockTime = stock.map();
-    //stock.map((x) => stockTime.push(x));
-    console.log(`stockTime: ${stockTime}`);
-    const stockV = Object.values(stock);
-    console.log(`stockV: ${stockV}`); //Orden valores stockV --> Open, High, Low, Close, Volume
+    const stock = Object.values(data)[1]; //Lista de objetos (cada objeto es una fecha)
+    stockDates = Object.keys(stock);
+    //console.log(`stock Dates: ${JSON.stringify(stockDates)}`);
+    const dateValues = Object.values(stock); //Lista de objetos, muestra valores/Orden valores stockV --> Open, High, Low, Close, Volume
+    //console.log(`DatesValues: ${JSON.stringify(dateValues)}`);
+
+    //---GetStock Close Price ---
+    dateValues.forEach((element) => {
+      console.log(element);
+      closePrice.push(element["4. close"]);
+    });
+    console.log(closePrice);
+    const myChart = new Chart(chart, {
+      type: "line",
+      data: {
+        labels: stockDates,
+        datasets: [
+          {
+            label: "# of Votes",
+            data: closePrice,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
   });
 };
+
 // Ejecutar promesa solo "on click"
 button.addEventListener("click", getStock(url));
 
 /*---Grafico---*/
 
-const ctx = document.getElementById("myChart");
-const myChart = new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
+const chart = document.getElementById("myChart");
 //})();
