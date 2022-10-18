@@ -1,4 +1,4 @@
-const graph1 = document.querySelector('#myChart1');
+const graph2 = document.querySelector('#myChart2');
 const ciudad = document.querySelector('#ciudad');
 const pais = document.querySelector('#pais');
 
@@ -36,7 +36,7 @@ const forecast5API = async (url) => {
     }
 }
 
-const graphForecast5Uno = () => {
+const graphForecast5Dos = () => {
 
     let nombre;
     let latLon;
@@ -57,30 +57,21 @@ const graphForecast5Uno = () => {
     
             let fechaHora = response.map(element => element.dt_txt);
             
-            let temperatura = response.map(element => element.main.temp - 273.15)    
+            let humidity = response.map(element => element.main.humidity)    
     
     
-            const graphClima = new Chart(graph1, {
-                type: 'bar',
+            const graphClima = new Chart(graph2, {
+                type: 'line',
                 data: {
                     labels: fechaHora,
                     datasets: [{
-                        label: `Temperatura ${nombre} en °C`,
-                        data: temperatura,
-                        backgroundColor: [
-                            'rgb(174, 214, 241 )',
-                            'rgb(133, 193, 233)',
-                            'rgb(93, 173, 226)',
-                            'rgb(52, 152, 219)',
-                            'rgb(46, 134, 193)',
-                            'rgb(40, 116, 166)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
+                      label: `Humedad relativa (%) en ${nombre}`,
+                      data: humidity,
+                      fill: true,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
                     }]
-                },
+                  },
                 options: {
                     scales: {
                         y: {
@@ -106,4 +97,4 @@ const graphForecast5Uno = () => {
 
 }
 
-export {graph1, ciudad, pais, graphForecast5Uno}
+export {graph2, graphForecast5Dos}

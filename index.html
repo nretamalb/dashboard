@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg bg-dark">
+    <header class="container-fluid bg-dark">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
               <a class="navbar-brand text-white fw-semibold" href="#">Dashboard</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,27 +36,27 @@
           </nav>
     </header>
     <main class="container-fluid p-4">
-        <h1>Pronóstico próximos 5 días</h1>
-        <div id="form" class="mb-2">
+        <h1 class="mb-4">Pronóstico próximos 5 días</h1>
+        <div id="form" class="container-fluid">
             <form>
                 <div class="mb-3">
                     <label for="ciudad" class="form-label">Ciudad</label>
-                    <input type="text" class="form-control" name="ciudad" id="ciudad"  placeholder="Santiago">
+                    <input type="text" class="form-control" name="ciudad" id="ciudad"  placeholder="Ej: Santiago">
                     <div class="alert alert-danger" role="alert">
                         Porfavor complete el campo con una Ciudad
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="pais" class="form-label">Código Pais</label>
-                    <input type="text" class="form-control" name="pais" id="pais" placeholder="Cl">
+                    <input type="text" class="form-control" name="pais" id="pais" placeholder="Ej: Cl">
                     <div class="alert2 alert alert-danger" role="alert">
                         Porfavor complete el campo con el código del pais donde está la ciudad
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" id="boton">Consultar</button>
+                <button type="button" class="btn btn-dark" id="boton">Consultar</button>
             </form>
         </div>
-        <div id="data">
+        <div id="data" class="m-4">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                   <div class="card">
@@ -64,8 +64,8 @@
                         <canvas id="myChart1"></canvas>
                     </div>
                     <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <h5 class="card-title" id="card1title">Card title</h5>
+                      <p class="card-text" id="card1text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     </div>
                   </div>
                 </div>
@@ -102,10 +102,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
         </div>
     </main>
-    <footer class="container-fluid p-3 pb-2 bg-dark text-white">
+    <footer class="container-fluid p-3 pb-2 mt-5 bg-dark text-white">
 
         <div class="row">
 
