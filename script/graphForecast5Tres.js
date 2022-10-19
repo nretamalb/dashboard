@@ -1,4 +1,4 @@
-const graph1 = document.querySelector('#myChart1');
+const graph3 = document.querySelector('#myChart3');
 const ciudad = document.querySelector('#ciudad');
 const pais = document.querySelector('#pais');
 
@@ -36,7 +36,7 @@ const forecast5API = async (url) => {
     }
 }
 
-const graphForecast5Uno = () => {
+const graphForecast5Tres = () => {
 
     let nombre;
     let latLon;
@@ -55,25 +55,32 @@ const graphForecast5Uno = () => {
             // 3
             console.log(response);
     
-            let fechaHora = response.map(element => element.dt_txt.split(' ')[0]);
+            let fechaHora = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))]; 
+
+            // let today = new Date();
+            // let dd = String(today.getDate()).padStart(2, '0');
+            // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            // let yyyy = today.getFullYear();
+
+            // for (let i = 0; i < fechaHora.length; i++) {
+
+                
+            //     today = Number(yyyy) + '-' + Number(mm) + '-' + (Number(dd) + i);
+            // }
+
+            let wind = response.map(element => Math.round(element.wind.speed * 1.609));    
+    
             
-            let temperatura = response.map(element => element.main.temp - 273.15)    
-    
-    
-            const graphClima = new Chart(graph1, {
-                type: 'bar',
-                data:  {
-                    labels: [...new Set(fechaHora)],
+            const graphClima = new Chart(graph3, {
+                type: 'line',
+                data: {
+                    labels: fechaHora,
                     datasets: [{
-                      label: `Temperatura ${nombre} en °C`,
-                      data: temperatura,
-                      backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgb(54, 162, 235)',
-                      ],
-                      borderWidth: 1
+                      label: `Viento (km/h) en ${nombre}`,
+                      data: wind,
+                      fill: true,
+                      borderColor: 'rgb(75, 192, 192)',
+                      tension: 0.1
                     }]
                   },
                 options: {
@@ -101,4 +108,4 @@ const graphForecast5Uno = () => {
 
 }
 
-export {graph1, ciudad, pais, graphForecast5Uno}
+export {graph3, graphForecast5Tres}

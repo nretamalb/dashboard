@@ -55,7 +55,7 @@ const graphForecast5Dos = () => {
             // 3
             console.log(response);
     
-            let fechaHora = response.map(element => element.dt_txt);
+            let fechaHora = response.map(element => element.dt_txt.split(' ')[0]);
             
             let humidity = response.map(element => element.main.humidity)    
     
@@ -63,7 +63,7 @@ const graphForecast5Dos = () => {
             const graphClima = new Chart(graph2, {
                 type: 'line',
                 data: {
-                    labels: fechaHora,
+                    labels: [...new Set(fechaHora)],
                     datasets: [{
                       label: `Humedad relativa (%) en ${nombre}`,
                       data: humidity,

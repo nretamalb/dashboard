@@ -1,5 +1,6 @@
-import { graph1, ciudad, pais, graphForecast5Uno } from "./graphForecast5Uno.js";
-import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
+// import { graph1, ciudad, pais, graphForecast5Uno } from "./graphForecast5Uno.js";
+// import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
+import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 
 (function () {
 
@@ -19,8 +20,9 @@ import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
             codigoPais = pais.value;
 
             e.preventDefault();
-            graphForecast5Uno();
-            graphForecast5Dos();
+            // graphForecast5Uno();
+            // graphForecast5Dos();
+            graphForecast5Tres();
             
         } else if ((ciudad.value !== '' && ciudadInput !== undefined) && (pais.value !== '' && codigoPais !== undefined)) {
 
@@ -37,9 +39,14 @@ import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
                 Chart.getChart(graph2).destroy();
             }
 
+            if (Chart.getChart(graph3)) {
+                Chart.getChart(graph3).destroy();
+            }
+
             e.preventDefault();
-            graphForecast5Uno();
-            graphForecast5Dos();
+            // graphForecast5Uno();
+            // graphForecast5Dos();
+            graphForecast5Tres();
         } else {
             
             document.querySelector('.alert').style.display = 'block';

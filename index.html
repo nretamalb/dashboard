@@ -36,7 +36,7 @@
           </nav>
     </header>
     <main class="container-fluid p-4">
-        <h1 class="mb-4">Pronóstico próximos 5 días</h1>
+        <h1 class="mb-4">Pronóstico para hoy y próximos 5 días</h1>
         <div id="form" class="container-fluid">
             <form>
                 <div class="mb-3">
@@ -59,46 +59,46 @@
         <div id="data" class="m-4">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
-                  <div class="card">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title" id="card1title"><i class="fa-solid fa-temperature-half fa-2xl"></i> Temperatura</h5>
+                      <!-- <p class="card-text" id="card1text">Proyección de la temperatura para los próximos días</p> -->
+                    </div>
                     <div>
                         <canvas id="myChart1"></canvas>
                     </div>
-                    <div class="card-body">
-                      <h5 class="card-title" id="card1title">Card title</h5>
-                      <p class="card-text" id="card1text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-cloud-rain fa-2xl"></i> Humedad</h5>
+                      <!-- <p class="card-text">Proyección de la humedad para los próximos días</p> -->
+                    </div>
                     <div>
                         <canvas id="myChart2"></canvas>
                     </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-wind fa-2x1"></i> Viento</h5>
+                      <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
+                    </div>
                     <div>
                         <canvas id="myChart3"></canvas>
                     </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
                   </div>
                 </div>
                 <div class="col">
-                  <div class="card">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-arrows-to-circle fa-2x1"></i> Presión</h5>
+                      <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                    </div>
                     <div>
                         <canvas id="myChart4"></canvas>
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     </div>
                   </div>
                 </div>
@@ -158,6 +158,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./script/index.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/c6b5cc67c4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
