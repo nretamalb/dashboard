@@ -54,30 +54,62 @@ const graphForecast5Tres = () => {
         .then(response => {
             // 3
             console.log(response);
+
+            
+            let fecha = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))]; 
+            
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let arrayDivisionPorFechas = [];
+
+            for (let i = 0; i < fecha.length; i++) {
+
+                today = (Number(dd) + i);
+
+                // Probar con filter acá
+                let filtroUno = response.map(element => {
     
-            let fechaHora = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))]; 
-
-            // let today = new Date();
-            // let dd = String(today.getDate()).padStart(2, '0');
-            // let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-            // let yyyy = today.getFullYear();
-
-            // for (let i = 0; i < fechaHora.length; i++) {
-
-                
-            //     today = Number(yyyy) + '-' + Number(mm) + '-' + (Number(dd) + i);
-            // }
-
-            let wind = response.map(element => Math.round(element.wind.speed * 1.609));    
+                    if (element.dt_txt.includes(`-${today}`)) {
     
+                        return element;
+                    } 
+                })
+    
+                let filtroDos = filtroUno.filter(element => element !== undefined);
+                console.log(filtroDos);
+                arrayDivisionPorFechas.push(filtroDos);
+            }
+
+            console.log(arrayDivisionPorFechas);
+
+            let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
+
+            console.log(valorFechaPrimeraVez);
+
+            let filtroFechaUndefined = valorFechaPrimeraVez.filter(element => element !== undefined);
+
+            let wind = filtroFechaUndefined.map(element => element.wind.speed);
+
+            console.log(wind);
+
+            let windKmH = wind.map(element => Math.round(element * 1.609));
+
+            console.log(windKmH); 
+
+            // Para manejar el comportamiento de la api segun la hora en la que se hace la peticion
+            if (windKmH.length < 6) {
+
+                fecha.pop();
+            }
+            
             
             const graphClima = new Chart(graph3, {
                 type: 'line',
                 data: {
-                    labels: fechaHora,
+                    labels: fecha,
                     datasets: [{
                       label: `Viento (km/h) en ${nombre}`,
-                      data: wind,
+                      data: windKmH,
                       fill: true,
                       borderColor: 'rgb(75, 192, 192)',
                       tension: 0.1
