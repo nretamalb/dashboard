@@ -2,7 +2,7 @@ const graph3 = document.querySelector('#myChart3');
 const ciudad = document.querySelector('#ciudad');
 const pais = document.querySelector('#pais');
 
-const inputData =  () => {
+const inputData = () => {
 
     let url = `http://api.openweathermap.org/geo/1.0/direct?q=${ciudad.value},${pais.value}&limit=1&appid=afa815d7eedd497bfe6a8d94b49ed7d2`;
     return geocoderAPI(url);
@@ -25,14 +25,11 @@ const forecast5API = async (url) => {
     try {
 
         return await axios.get(url)
-                .then(data => {
-                    // 2
-                    console.log(data)
-                    return data.data.list;
-                }) 
-    } catch(e) {
+            .then(data => data.data.list)
 
-        console.log(e);
+    } catch (e) {
+
+        console.error(e);
     }
 }
 
@@ -43,101 +40,98 @@ const graphForecast5Tres = () => {
     let urlClima;
 
     inputData()
-    .then(response => {
-        // 1 Devuelve un JSON adentro de un array
-        console.log(response);
-        nombre = response[0].name;
-        latLon = [response[0].lat, response[0].lon];
-        urlClima = `https://api.openweathermap.org/data/2.5/forecast?lat=${latLon[0]}&lon=${latLon[1]}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`;
-
-        forecast5API(urlClima)
         .then(response => {
-            // 3
-            console.log(response);
 
-            
-            let fecha = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))]; 
-            
-            let today = new Date();
-            let dd = String(today.getDate()).padStart(2, '0');
-            let arrayDivisionPorFechas = [];
+            nombre = response[0].name;
+            latLon = [response[0].lat, response[0].lon];
+            urlClima = `https://api.openweathermap.org/data/2.5/forecast?lat=${latLon[0]}&lon=${latLon[1]}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`;
 
-            for (let i = 0; i < fecha.length; i++) {
+            forecast5API(urlClima)
+                .then(response => {
+                    console.log(response);
 
-                today = (Number(dd) + i);
+                    let fecha = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))];
 
-                // Probar con filter acá
-                let filtroUno = response.map(element => {
-    
-                    if (element.dt_txt.includes(`-${today}`)) {
-    
-                        return element;
-                    } 
-                })
-    
-                let filtroDos = filtroUno.filter(element => element !== undefined);
-                console.log(filtroDos);
-                arrayDivisionPorFechas.push(filtroDos);
-            }
+                    let today = new Date();
+                    let ddToday = String(today.getDate()).padStart(2, '0');
 
-            console.log(arrayDivisionPorFechas);
+                    let tomorrow = new Date(today);
+                    tomorrow.setDate(today.getDate() + 1);
+                    let ddTomorrow = String(tomorrow.getDate()).padStart(2, '0');
 
-            let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
+                    let filtro;
+                    let arrayDivisionPorFechas = [];
 
-            console.log(valorFechaPrimeraVez);
+                    // Esto es porque la api no está sincronizada con el horario local
+                    if (response[0].dt_txt.split(' ')[0].includes(`-${ddToday}`)) {
 
-            let filtroFechaUndefined = valorFechaPrimeraVez.filter(element => element !== undefined);
+                        for (let i = 0; i < fecha.length; i++) {
 
-            let wind = filtroFechaUndefined.map(element => element.wind.speed);
+                            today = (Number(ddToday) + i);
 
-            console.log(wind);
+                            filtro = response.filter(element => element.dt_txt.includes(`-${today}`));
 
-            let windKmH = wind.map(element => Math.round(element * 1.609));
-
-            console.log(windKmH); 
-
-            // Para manejar el comportamiento de la api segun la hora en la que se hace la peticion
-            if (windKmH.length < 6) {
-
-                fecha.pop();
-            }
-            
-            
-            const graphClima = new Chart(graph3, {
-                type: 'line',
-                data: {
-                    labels: fecha,
-                    datasets: [{
-                      label: `Viento (km/h) en ${nombre}`,
-                      data: windKmH,
-                      fill: true,
-                      borderColor: 'rgb(75, 192, 192)',
-                      tension: 0.1
-                    }]
-                  },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                            arrayDivisionPorFechas.push(filtro);
                         }
-                    },
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                font: {
-                                    size: 14,
-                                    weight: 600
+                    } else {
+
+                        for (let i = 0; i < fecha.length; i++) {
+
+                            tomorrow = (Number(ddTomorrow) + i);
+
+                            filtro = response.filter(element => element.dt_txt.includes(`-${tomorrow}`));
+
+                            arrayDivisionPorFechas.push(filtro);
+                        }
+                    }
+
+                    console.log(filtro);
+
+                    console.log(arrayDivisionPorFechas);
+
+                    let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
+
+                    let wind = valorFechaPrimeraVez.map(element => element.wind.speed);
+
+                    console.log(wind);
+
+                    let windKmH = valorFechaPrimeraVez.map(element => Math.round(element.wind.speed * 1.609));
+
+                    const graphClima = new Chart(graph3, {
+                        type: 'line',
+                        data: {
+                            labels: fecha,
+                            datasets: [{
+                                label: `Viento (km/h) en ${nombre}`,
+                                data: windKmH,
+                                fill: true,
+                                borderColor: 'rgb(75, 192, 192)',
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        font: {
+                                            size: 14,
+                                            weight: 600
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            });
+                    });
+                })
         })
-    })
 
 
 }
 
-export {graph3, graphForecast5Tres}
+export { graph3, graphForecast5Tres }
