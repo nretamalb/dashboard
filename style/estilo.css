@@ -1,9 +1,18 @@
 #data {
-    display: none;
+  display: none;
 }
 .alert {
-    display: none;
+  display: none;
 }
 .alert2 {
-    display: none;
+  display: none;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+}
+
+.searchBar {
+  display: flex;
 }
