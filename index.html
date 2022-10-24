@@ -1,232 +1,164 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./style/estilo.css" />
-    <title>Home | Dashboard</title>
-  </head>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/estilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Home | Dashboard</title>
+</head>
+
+<body>
     <header class="container-fluid bg-dark">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white fw-semibold" href="#">Dashboard</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a
-                  class="nav-link active text-secondary"
-                  aria-current="page"
-                  href="#"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="#">Contácto</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="#">Ayuda</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <a class="navbar-brand text-white fw-semibold" href="#">Dashboard</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active text-secondary" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">Contácto</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">Ayuda</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
     </header>
     <main class="container-fluid p-4">
-      <h1 class="mb-4">Busca una ciudad</h1>
-      <div id="form" class="container-fluid searchBar">
-        <form>
-          <div class="mb-3">
-            <label for="ciudad" class="form-label">Ciudad</label>
-            <input
-              type="text"
-              class="form-control"
-              name="ciudad"
-              id="ciudad"
-              placeholder="Ej: Santiago"
-            />
-            <div class="alert alert-danger" role="alert">
-              Porfavor complete el campo con una Ciudad
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="pais" class="form-label">Código Pais</label>
-            <input
-              type="text"
-              class="form-control"
-              name="pais"
-              id="pais"
-              placeholder="Ej: Cl"
-            />
-            <div class="alert2 alert alert-danger" role="alert">
-              Porfavor complete el campo con el código del pais donde está la
-              ciudad
-            </div>
-          </div>
-          <button type="button" class="btn btn-dark" id="boton">
-            Consultar
-          </button>
-        </form>
-        <div class="map"></div>
-      </div>
-      <div id="data" class="m-4">
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-          <div class="col">
-            <div class="card">
-              <div>
-                <div class="card-body">
-                  <h5 class="summary-title">Card title</h5>
-                  <p class="card-text" id="card1text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
+        <h1 class="mb-4">Pronóstico del clima</h1>
+        <div id="form" class="container-fluid">
+            <form>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" name="ciudad" id="ciudad"  placeholder="Ej: Santiago">
+                    <div class="alert alert-danger" role="alert">
+                        Porfavor complete el campo con una Ciudad
+                    </div>
                 </div>
-                <canvas id=""></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div>
-                <canvas id="myChart1"></canvas>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title" id="card1title">Card title</h5>
-                <p class="card-text" id="card1text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div>
-                <canvas id="myChart2"></canvas>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div>
-                <canvas id="myChart3"></canvas>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <div>
-                <canvas id="myChart4"></canvas>
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">
-                  This is a longer card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-              </div>
-            </div>
-          </div>
+                <div class="mb-3">
+                    <label for="pais" class="form-label">Código Pais</label>
+                    <input type="text" class="form-control" name="pais" id="pais" placeholder="Ej: Cl">
+                    <div class="alert2 alert alert-danger" role="alert">
+                        Porfavor complete el campo con el código del pais donde está la ciudad
+                    </div>
+                </div>
+                <button type="button" class="btn btn-dark" id="boton">Consultar</button>
+            </form>
         </div>
-      </div>
+        <div id="data" class="m-4">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title" id="card1title"><i class="fa-solid fa-temperature-half fa-2xl"></i> Temperatura</h5>
+                      <!-- <p class="card-text" id="card1text">Proyección de la temperatura para los próximos días</p> -->
+                    </div>
+                    <div>
+                        <canvas id="myChart1"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-cloud-rain fa-2xl"></i> Humedad</h5>
+                      <!-- <p class="card-text">Proyección de la humedad para los próximos días</p> -->
+                    </div>
+                    <div>
+                        <canvas id="myChart2"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-wind fa-2x1"></i> Viento</h5>
+                      <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p> -->
+                    </div>
+                    <div>
+                        <canvas id="myChart3"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card p-2">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class="fa-solid fa-arrows-to-circle fa-2x1"></i> Presión atmosférica</h5>
+                      <!-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                    </div>
+                    <div>
+                        <canvas id="myChart4"></canvas>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="container-fluid p-3 pb-2 mt-5 bg-dark text-white">
-      <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-3">
-          <p class="h5">Clima</p>
-          <div class="mb-2">
-            <p class="text-secondary">Santiago, Chile</p>
-          </div>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h5">Clima</p>
+                <div class="mb-2">
+                    <p class="text-secondary">Santiago, Chile</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h6">Links</p>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Home</a>
+                </div>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Blog</a>
+                </div>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Discussions</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h6">Legal</p>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Términos y condiciones</a>
+                </div>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Privacidad</a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-lg-3">
+                <p class="h6">Contácto</p>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Instagram</a>
+                </div>
+                <div class="mb-2">
+                    <a href="#" class="text-secondary text-decoration-none">Twitter</a>
+                </div>
+            </div>
+            <div class="col-xs-12 pt-4">
+                <p class="text-white text-center">Copyright - All rights reserved © 2022</p>
+            </div>
+
         </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-          <p class="h6">Links</p>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none">Home</a>
-          </div>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none">Blog</a>
-          </div>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none"
-              >Discussions</a
-            >
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-          <p class="h6">Legal</p>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none"
-              >Términos y condiciones</a
-            >
-          </div>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none"
-              >Privacidad</a
-            >
-          </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-          <p class="h6">Contácto</p>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none"
-              >Instagram</a
-            >
-          </div>
-          <div class="mb-2">
-            <a href="#" class="text-secondary text-decoration-none">Twitter</a>
-          </div>
-        </div>
-        <div class="col-xs-12 pt-4">
-          <p class="text-white text-center">
-            Copyright - All rights reserved © 2022
-          </p>
-        </div>
-      </div>
+
     </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./script/index.js" type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  </body>
+    <script src="https://kit.fontawesome.com/c6b5cc67c4.js" crossorigin="anonymous"></script>
+</body>
+
 </html>
