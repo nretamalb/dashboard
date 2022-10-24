@@ -1,4 +1,4 @@
-const graph2 = document.querySelector('#myChart2');
+const graph3 = document.querySelector('#myChart3');
 const ciudad = document.querySelector('#ciudad');
 const pais = document.querySelector('#pais');
 
@@ -33,7 +33,7 @@ const forecast5API = async (url) => {
     }
 }
 
-const graphForecast5Dos = () => {
+const graphForecast5Tres = () => {
 
     let nombre;
     let latLon;
@@ -48,6 +48,7 @@ const graphForecast5Dos = () => {
 
             forecast5API(urlClima)
                 .then(response => {
+                    console.log(response);
 
                     let fecha = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))];
 
@@ -84,17 +85,25 @@ const graphForecast5Dos = () => {
                         }
                     }
 
+                    console.log(filtro);
+
+                    console.log(arrayDivisionPorFechas);
+
                     let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
 
-                    let humidity = valorFechaPrimeraVez.map(element => element.main.humidity);
+                    let wind = valorFechaPrimeraVez.map(element => element.wind.speed);
 
-                    const graphClima = new Chart(graph2, {
+                    console.log(wind);
+
+                    let windKmH = valorFechaPrimeraVez.map(element => Math.round(element.wind.speed * 1.609));
+
+                    const graphClima = new Chart(graph3, {
                         type: 'line',
                         data: {
                             labels: fecha,
                             datasets: [{
-                                label: `Humedad relativa (%) en ${nombre}`,
-                                data: humidity,
+                                label: `Viento (km/h) en ${nombre}`,
+                                data: windKmH,
                                 fill: true,
                                 borderColor: 'rgb(75, 192, 192)',
                                 tension: 0.1
@@ -125,4 +134,4 @@ const graphForecast5Dos = () => {
 
 }
 
-export { graph2, graphForecast5Dos }
+export { graph3, graphForecast5Tres }

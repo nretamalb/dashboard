@@ -1,4 +1,4 @@
-const graph2 = document.querySelector('#myChart2');
+const graph4 = document.querySelector('#myChart4');
 const ciudad = document.querySelector('#ciudad');
 const pais = document.querySelector('#pais');
 
@@ -33,7 +33,7 @@ const forecast5API = async (url) => {
     }
 }
 
-const graphForecast5Dos = () => {
+const graphForecast5Cuatro = () => {
 
     let nombre;
     let latLon;
@@ -86,18 +86,20 @@ const graphForecast5Dos = () => {
 
                     let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
 
-                    let humidity = valorFechaPrimeraVez.map(element => element.main.humidity);
+                    let pressure = valorFechaPrimeraVez.map(element => element.main.pressure);
 
-                    const graphClima = new Chart(graph2, {
-                        type: 'line',
+                    const graphClima = new Chart(graph4, {
+                        type: 'doughnut',
                         data: {
                             labels: fecha,
                             datasets: [{
-                                label: `Humedad relativa (%) en ${nombre}`,
-                                data: humidity,
-                                fill: true,
-                                borderColor: 'rgb(75, 192, 192)',
-                                tension: 0.1
+                                label: `Presión Atmosférica (hPa) en ${nombre}`,
+                                data: pressure,
+                                backgroundColor: [
+                                    'rgb(54, 162, 235)',
+                                    'rgb(35, 130, 205)'
+                                ],
+                                hoverOffset: 4
                             }]
                         },
                         options: {
@@ -125,4 +127,4 @@ const graphForecast5Dos = () => {
 
 }
 
-export { graph2, graphForecast5Dos }
+export { graph4, graphForecast5Cuatro }
