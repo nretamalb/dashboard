@@ -1,15 +1,17 @@
 
 //Elemento canvas de tarjeta que muestra temperaturas maximas
 const graph1 = document.querySelector("#myChart1");
+let fecha;
+let temperaturaCelcius;
 
 //----Obtenemos informacion de la temperatura utilizando la api correspondiente----
 const getTempData = (infoCity) => {
-  console.log(infoCity);
+  // console.log(infoCity);
   return infoCity.then(response => {
 
     
     let lat = response[2];
-    console.log(lat);
+    // console.log(lat);
     let lon = response[3];
   
     return Promise.resolve(
@@ -24,8 +26,9 @@ const getTempData = (infoCity) => {
 correspondiente a las fechas y sus temperaturas para ese dia----*/
 const dataRefactoring = (infoCity) => {
   getTempData(infoCity).then((response) => {
-    let fecha = [
-      ...new Set(response.map((element) => element.dt_txt.split(" ")[0])),
+    console.log(response.list);
+    fecha = [
+      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0])),
     ];
 
     let today = new Date();
@@ -39,11 +42,11 @@ const dataRefactoring = (infoCity) => {
     let arrayDivisionPorFechas = [];
 
     // Esto es porque la api no está sincronizada con el horario local
-    if (response[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
+    if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
       for (let i = 0; i < fecha.length; i++) {
         today = Number(ddToday) + i;
 
-        filtro = response.filter((element) =>
+        filtro = response.list.filter((element) =>
           element.dt_txt.includes(`-${today}`)
         );
 
@@ -53,7 +56,7 @@ const dataRefactoring = (infoCity) => {
       for (let i = 0; i < fecha.length; i++) {
         tomorrow = Number(ddTomorrow) + i;
 
-        filtro = response.filter((element) =>
+        filtro = response.list.filter((element) =>
           element.dt_txt.includes(`-${tomorrow}`)
         );
 
@@ -69,7 +72,7 @@ const dataRefactoring = (infoCity) => {
       (element) => element.main.temp_max
     );
 
-    let temperaturaCelcius = valorFechaPrimeraVez.map(
+    temperaturaCelcius = valorFechaPrimeraVez.map(
       (element) => element.main.temp_max - 273.15
     );
 
@@ -87,7 +90,8 @@ const maxTempsGraph = (infoCity) => {
       labels: fecha,
       datasets: [
         {
-          label: `Temperatura ${infoCity[0]} en °C`,
+          // Falta acceder a nombre ciudad
+          label: `Temperatura Ciudad en °C`,
           data: temperaturaCelcius,
           backgroundColor: ["rgba(54, 162, 235, 0.2)"],
           borderColor: ["rgb(54, 162, 235)"],
