@@ -73,14 +73,23 @@ const dataRefactoring = (infoCity) => {
       (element) => element.main.temp_max - 273.15
     );
 
-    return { fecha, temperaturaCelcius };
+    console.log(fecha);
+    console.log(temperaturaCelcius);
+
+
+
+    maxTempsGraph();
+    // return [fecha, temperaturaCelcius];
   });
 };
+
 
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {
   // console.log("maxTempsGraph Executed");
-  dataRefactoring(infoCity);
+  // dataRefactoring(infoCity)
+  // dataRefactoring(infoCity)
+
   const graphTemp = new Chart(graph1, {
     type: "bar",
     data: {
@@ -114,6 +123,8 @@ const maxTempsGraph = (infoCity) => {
       },
     },
   });
+
+  return maxTempsGraph;
 };
 
-export { maxTempsGraph };
+export { dataRefactoring };

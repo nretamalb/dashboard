@@ -1,4 +1,4 @@
-import { maxTempsGraph } from "./graphTemp.js";
+import { dataRefactoring } from "./graphTemp.js";
 import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
 import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
@@ -29,10 +29,10 @@ import { getCity } from "./geocode.js";
       e.preventDefault();
       // console.log(cityData);
       
-      maxTempsGraph(getCity());
-      graphForecast5Dos();
-      graphForecast5Tres();
-      graphForecast5Cuatro();
+      dataRefactoring(getCity());
+      // graphForecast5Dos();
+      // graphForecast5Tres();
+      // graphForecast5Cuatro();
     } else if (
       ciudad.value !== "" &&
       ciudadInput !== undefined &&
