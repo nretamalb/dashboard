@@ -65,4 +65,4 @@ const getCity = () => {
 };
 
 //----Exportamos variables relevantes y funcion----
-export { getCity, cityData };
+export { getCity };

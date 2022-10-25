@@ -1,16 +1,23 @@
-import { cityData } from "./geocode.js";
+
 //Elemento canvas de tarjeta que muestra temperaturas maximas
 const graph1 = document.querySelector("#myChart1");
 
 //----Obtenemos informacion de la temperatura utilizando la api correspondiente----
-const getTempData = async (infoCity) => {
+const getTempData = (infoCity) => {
   console.log(infoCity);
-  let lat = infoCity[2];
-  let lon = infoCity[3];
-  console.log(lon);
-  return await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
-  ).then((data) => data.json());
+  return infoCity.then(response => {
+
+    
+    let lat = response[2];
+    console.log(lat);
+    let lon = response[3];
+  
+    return Promise.resolve(
+      fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
+    ).then((data) => data.json())
+    )
+  })
 };
 
 /*---- Tomamos informacion entregada por la api y exportamos la informacion
@@ -65,15 +72,14 @@ const dataRefactoring = (infoCity) => {
     let temperaturaCelcius = valorFechaPrimeraVez.map(
       (element) => element.main.temp_max - 273.15
     );
-    console.log(fecha);
-    console.log(temperaturaCelcius);
+
     return { fecha, temperaturaCelcius };
   });
 };
 
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {
-  console.log("maxTempsGraph Executed");
+  // console.log("maxTempsGraph Executed");
   dataRefactoring(infoCity);
   const graphTemp = new Chart(graph1, {
     type: "bar",

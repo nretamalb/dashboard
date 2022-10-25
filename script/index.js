@@ -2,7 +2,11 @@ import { maxTempsGraph } from "./graphTemp.js";
 import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
 import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
-import { getCity, cityData } from "./geocode.js";
+import { getCity } from "./geocode.js";
+
+// console.log(getCity());
+// console.log(cityData);
+
 (function async() {
   let ciudadInput;
   let codigoPais;
@@ -23,8 +27,9 @@ import { getCity, cityData } from "./geocode.js";
       codigoPais = pais.value;
 
       e.preventDefault();
-      getCity();
-      maxTempsGraph(cityData);
+      // console.log(cityData);
+      
+      maxTempsGraph(getCity());
       graphForecast5Dos();
       graphForecast5Tres();
       graphForecast5Cuatro();
