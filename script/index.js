@@ -29,7 +29,7 @@ import { getCity } from "./geocode.js";
       e.preventDefault();
       // console.log(cityData);
       
-      dataRefactoring(getCity());
+      maxTempsGraph(getCity());
       // graphForecast5Dos();
       // graphForecast5Tres();
       // graphForecast5Cuatro();
@@ -61,10 +61,10 @@ import { getCity } from "./geocode.js";
       }
 
       e.preventDefault();
-      graphForecast5Uno();
-      graphForecast5Dos();
-      graphForecast5Tres();
-      graphForecast5Cuatro();
+      // graphForecast5Uno();
+      // graphForecast5Dos();
+      // graphForecast5Tres();
+      // graphForecast5Cuatro();
     } else {
       document.querySelector(".alert").style.display = "block";
       document.querySelector(".alert2").style.display = "block";
