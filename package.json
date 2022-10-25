@@ -18,5 +18,6 @@
   "dependencies": {
     "chart.js": "^3.9.1"
   },
-  "description": ""
+  "description": "",
+  "type": "module"
 }
