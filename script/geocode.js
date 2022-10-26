@@ -46,10 +46,13 @@ const getCity = () => {
     countryName = data[0].country;
     lon = data[0].lon;
     lat = data[0].lat;
-    cityData.push(cityName);
-    cityData.push(countryName);
-    cityData.push(lat);
-    cityData.push(lon);
+
+    cityData = {
+      cityName,
+      countryName,
+      lat,
+      lon,
+    };
 
     // cityData = {
     //   cityName: cityName,

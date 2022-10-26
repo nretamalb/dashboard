@@ -3,23 +3,6 @@
   let currentTemperature = document.querySelector(".city-temperature");
   let city = document.querySelector(".city-name");
 
-  async function getCity() {
-    console.log("GETCITY!");
-    cityName = cityInput.value;
-    countryName = countryInput.value;
-    console.log(cityName);
-    url =
-      "http://api.openweathermap.org/geo/1.0/direct?q=" +
-      cityName +
-      "," +
-      countryName +
-      "&limit=5&appid=" +
-      apiKey;
-    await get(url).then((data) => {
-      currentWeather(data);
-    });
-  }
-
   async function currentWeather(data) {
     console.log(data);
 
