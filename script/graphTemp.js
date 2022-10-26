@@ -6,12 +6,12 @@ let temperaturaCelcius;
 
 //----Obtenemos informacion de la temperatura utilizando la api correspondiente----
 const getTempData = (infoCity) => {
-  // console.log(infoCity);
+
   return infoCity.then(response => {
 
     
     let lat = response[2];
-    // console.log(lat);
+    
     let lon = response[3];
   
     return Promise.resolve(
@@ -83,16 +83,13 @@ const dataRefactoring = (infoCity) => {
 
 
     maxTempsGraph();
-    // return [fecha, temperaturaCelcius];
   });
 };
 
 
 //---- Generamos grafico con la informacion ya filtrada
-const maxTempsGraph = (infoCity) => {
-  // console.log("maxTempsGraph Executed");
-  // dataRefactoring(infoCity)
-  // dataRefactoring(infoCity)
+const maxTempsGraph = () => {
+  console.log("maxTempsGraph Executed");
 
   const graphTemp = new Chart(graph1, {
     type: "bar",
@@ -129,7 +126,6 @@ const maxTempsGraph = (infoCity) => {
     },
   });
 
-  return maxTempsGraph;
 };
 
 export { dataRefactoring };
