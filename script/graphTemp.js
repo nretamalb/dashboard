@@ -37,7 +37,6 @@ const dataRefactoring = async (infoCity) => {
       console.log('Se ejecutó con today');
       for (let i = 0; i < fecha.length; i++) {
         today = Number(ddToday) + i;
-
         filtro = response.list.filter((element) =>
           element.dt_txt.includes(`-${today}`)
         );
@@ -71,6 +70,7 @@ const dataRefactoring = async (infoCity) => {
     return [fecha, temperaturaCelcius];
   });
 };
+
 
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {
@@ -112,6 +112,7 @@ const maxTempsGraph = (infoCity) => {
       },
     });
   });
+
 };
 
 export { maxTempsGraph, graph1 };
