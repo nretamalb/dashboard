@@ -1,3 +1,4 @@
+import Chart from "chart.js";
 //Elemento canvas de tarjeta que muestra temperaturas maximas
 const graph1 = document.querySelector("#myChart1");
 // let fecha;
