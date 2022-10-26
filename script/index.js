@@ -29,7 +29,7 @@ import { getCity } from "./geocode.js";
       e.preventDefault();
       // console.log(cityData);
       
-      maxTempsGraph(getCity());
+      dataRefactoring(getCity());
       // graphForecast5Dos();
       // graphForecast5Tres();
       // graphForecast5Cuatro();
