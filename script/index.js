@@ -2,7 +2,7 @@ import { maxTempsGraph, graph1 } from "./graphTemp.js";
 import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
 import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
-import { getCity } from "./geocode.js";
+import { getCity, cityInput, countryInput } from "./geocode.js";
 
 
 (function async() {
@@ -12,9 +12,9 @@ import { getCity } from "./geocode.js";
   const boton = document.querySelector("#boton");
   boton.addEventListener("click", (e) => {
     if (
-      ciudad.value !== "" &&
+      cityInput.value !== "" &&
       ciudadInput === undefined &&
-      pais.value !== "" &&
+      countryInput.value !== "" &&
       codigoPais === undefined
     ) {
       document.querySelector(".alert").style.display = "none";
@@ -31,9 +31,9 @@ import { getCity } from "./geocode.js";
       });
 
     } else if (
-      ciudad.value !== "" &&
+      cityInput.value !== "" &&
       ciudadInput !== undefined &&
-      pais.value !== "" &&
+      countryInput.value !== "" &&
       codigoPais !== undefined
     ) {
       document.querySelector(".alert").style.display = "none";

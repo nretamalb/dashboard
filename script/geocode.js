@@ -13,7 +13,7 @@ let url = "";
 //-------------------------
 
 //----Objeto con informacion de la ciudad----
-let cityData = [];
+let cityData;
 //----Funcion que obtiene datos de la ciudad solicitada----
 const get = () => {
   //-----Tomar valores de ciudad desde el input------
@@ -58,4 +58,4 @@ const getCity = async () => {
 };
 
 //----Exportamos variables relevantes y funcion----
-export { getCity };
+export { getCity, cityInput, countryInput };
