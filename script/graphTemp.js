@@ -19,7 +19,7 @@ const dataRefactoring = async (infoCity) => {
   return await getTempData(infoCity).then((response) => {
     console.log(response.list);
     let fecha = [
-      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0])),
+      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
     ];
 
     let today = new Date();
@@ -34,6 +34,7 @@ const dataRefactoring = async (infoCity) => {
 
     // Esto es porque la api no está sincronizada con el horario local
     if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
+      console.log('Se ejecutó con today');
       for (let i = 0; i < fecha.length; i++) {
         today = Number(ddToday) + i;
 
@@ -44,6 +45,7 @@ const dataRefactoring = async (infoCity) => {
         arrayDivisionPorFechas.push(filtro);
       }
     } else {
+      console.log('Se ejecutó con tomorrow');
       for (let i = 0; i < fecha.length; i++) {
         tomorrow = Number(ddTomorrow) + i;
 
