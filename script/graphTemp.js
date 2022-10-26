@@ -19,7 +19,7 @@ const dataRefactoring = async (infoCity) => {
   return await getTempData(infoCity).then((response) => {
     console.log(response.list);
     let fecha = [
-      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0])),
+      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
     ];
 
     let today = new Date();

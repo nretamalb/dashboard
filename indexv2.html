@@ -1,69 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style/style.css" />
-    <title>Dashboard</title>
-  </head>
-  <body>
-    <header>
-      <nav class="nav-container">
-        <div class="nav-bar">
-          <div class="nav-menu">
-            <a href="#">Inicio</a>
-            <a href="#">Contacto</a>
-            <a href="">Ayuda</a>
-          </div>
-          <div class="nav-search">
-            <input
-              type="text"
-              id="ciudad"
-              placeholder="Santiago..."
-              value="Santiago"
-            />
-            <div class="alert" role="alert">
-              Porfavor complete el campo con una Ciudad
-            </div>
-            <input type="text" id="pais" placeholder="CL..." value="cl" />
-            <div class="alert2" role="alert">
-              Porfavor complete el campo con el código del pais donde está la
-              ciudad
-            </div>
-            <button id="boton">Buscar</button>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav-container">
+      <div class="nav-bar">
+        <div class="nav-menu">
+          <a href="#">Inicio</a>
+          <a href="#">Contacto</a>
+          <a href="">Ayuda</a>
         </div>
-      </nav>
-    </header>
-    <main>
-      <div class="dashboard-container" id="data">
-        <div class="dashboard">
-          <div class="card">
-            <div class="weather-summary">
-              <h2 class="city-name"></h2>
-              <p class="city-temperature"></p>
-            </div>
-            <div class="weather-image"></div>
+        <div class="nav-search">
+          <input type="text" id="ciudad" placeholder="Santiago..." value="Santiago" />
+          <div class="alert" role="alert">
+            Porfavor complete el campo con una Ciudad
           </div>
-          <div class="card">
-            <canvas id="myChart1"></canvas>
+          <input type="text" id="pais" placeholder="CL..." value="cl" />
+          <div class="alert2" role="alert">
+            Porfavor complete el campo con el código del pais donde está la
+            ciudad
           </div>
-          <div class="card">
-            <canvas id="myChart2"></canvas>
-          </div>
-          <div class="card">
-            <canvas id="myChart3"></canvas>
-          </div>
-          <div class="card">
-            <canvas id="myChart4"></canvas>
-          </div>
+          <button id="boton">Buscar</button>
         </div>
       </div>
-    </main>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    </nav>
+  </header>
+  <main>
+    <div class="dashboard-container" id="data">
+      <div class="dashboard">
+        <div class="card">
+          <div class="weather-summary">
+            <h2 class="city-name"></h2>
+            <p class="city-temperature"></p>
+          </div>
+          <div class="weather-image"></div>
+        </div>
+        <div class="card">
+          <canvas id="myChart1"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart2"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart3"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart4"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
-    <script src="./script/index.js" type="module"></script>
-  </body>
+  <script src="./script/index.js" type="module"></script>
+</body>
+
 </html>
