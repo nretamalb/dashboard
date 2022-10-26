@@ -1,8 +1,5 @@
-import Chart from "chart.js";
 //Elemento canvas de tarjeta que muestra temperaturas maximas
 const graph1 = document.querySelector("#myChart1");
-// let fecha;
-// let temperaturaCelcius;
 
 //----Obtenemos informacion de la temperatura utilizando la api correspondiente----
 const getTempData = (infoCity) => {
@@ -75,7 +72,6 @@ const dataRefactoring = async (infoCity) => {
 
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {
-  // console.log("maxTempsGraph Executed");
   dataRefactoring(infoCity).then((response) => {
     let fecha = response[0];
     let temperaturaCelcius = response[1];

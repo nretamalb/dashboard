@@ -4,8 +4,6 @@ import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
 import { getCity } from "./geocode.js";
 
-// console.log(getCity());
-// console.log(cityData);
 
 (function async() {
   let ciudadInput;
@@ -32,9 +30,6 @@ import { getCity } from "./geocode.js";
         maxTempsGraph(cityData);
       });
 
-      // graphForecast5Dos();
-      // graphForecast5Tres();
-      // graphForecast5Cuatro();
     } else if (
       ciudad.value !== "" &&
       ciudadInput !== undefined &&
@@ -50,9 +45,9 @@ import { getCity } from "./geocode.js";
         Chart.getChart(graph1).destroy();
       }
 
-      if (Chart.getChart(graph2)) {
-        Chart.getChart(graph2).destroy();
-      }
+      // if (Chart.getChart(graph2)) {
+      //   Chart.getChart(graph2).destroy();
+      // }
 
       if (Chart.getChart(graph3)) {
         Chart.getChart(graph3).destroy();

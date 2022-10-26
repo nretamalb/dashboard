@@ -13,7 +13,6 @@ let url = "";
 //-------------------------
 
 //----Objeto con informacion de la ciudad----
-//let cityData = new Object();
 let cityData = [];
 //----Funcion que obtiene datos de la ciudad solicitada----
 const get = () => {
@@ -40,29 +39,20 @@ const get = () => {
       })
   );
 };
-const getCity = () => {
-  return get().then((data) => {
-    cityName = data[0].name;
-    countryName = data[0].country;
-    lon = data[0].lon;
-    lat = data[0].lat;
-
-    cityData = {
-      cityName,
-      countryName,
-      lat,
-      lon,
-    };
-
-    // cityData = {
-    //   cityName: cityName,
-    //   countryName: countryName,
-    //   lat: lat,
-    //   lon: lon,
-    // };
-    console.log("cityData Executed");
-    return cityData;
-  });
+const getCity = async () => {
+  const data = await get();
+  cityName = data[0].name;
+  countryName = data[0].country;
+  lon = data[0].lon;
+  lat = data[0].lat;
+  cityData = {
+    cityName,
+    countryName,
+    lat,
+    lon
+  };
+  console.log("cityData Executed");
+  return cityData;
   //Creo un objeto con los valores obtenidos de respuesta y exporto
   //ese objeto para utilizarlo en index.js
 };
