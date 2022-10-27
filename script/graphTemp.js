@@ -1,113 +1,152 @@
-import { cityData } from "./geocode.js";
 //Elemento canvas de tarjeta que muestra temperaturas maximas
 const graph1 = document.querySelector("#myChart1");
 
 //----Obtenemos informacion de la temperatura utilizando la api correspondiente----
-const getTempData = async (infoCity) => {
-  console.log(infoCity);
-  let lat = infoCity[2];
-  let lon = infoCity[3];
-  console.log(lon);
-  return await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
-  ).then((data) => data.json());
+const getTempData = (infoCity) => {
+
+  let lat = infoCity.lat;
+  let lon = infoCity.lon;
+
+  return Promise.resolve(
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
+    ).then((data) => data.json())
+
+  );
 };
 
 /*---- Tomamos informacion entregada por la api y exportamos la informacion
 correspondiente a las fechas y sus temperaturas para ese dia----*/
-const dataRefactoring = (infoCity) => {
-  getTempData(infoCity).then((response) => {
+const dataRefactoring = async (infoCity) => {
+
+  return await getTempData(infoCity).then((response) => {
+    console.log(response.list);
+
+    /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 
+    de los dias de las predicciones ----*/
     let fecha = [
-      ...new Set(response.map((element) => element.dt_txt.split(" ")[0])),
+      ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
     ];
 
-    let today = new Date();
-    let ddToday = String(today.getDate()).padStart(2, "0");
+    // Uso de la libreria MomentJS para trabajar con fechas
+    const formato = 'DD';
 
-    let tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    let ddTomorrow = String(tomorrow.getDate()).padStart(2, "0");
+    let today = moment();
+
+    let ddToday = today.format(formato).padStart(2, '0');
+    console.log(ddToday);
+
+    let tomorrow = moment().add(1, 'days');
+    let ddTomorrow = tomorrow.format(formato).padStart(2, '0');
+    console.log(ddTomorrow);
+
 
     let filtro;
     let arrayDivisionPorFechas = [];
 
     // Esto es porque la api no está sincronizada con el horario local
-    if (response[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
-      for (let i = 0; i < fecha.length; i++) {
-        today = Number(ddToday) + i;
+    if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
 
-        filtro = response.filter((element) =>
-          element.dt_txt.includes(`-${today}`)
+      console.log('Se ejecutó con today');
+      for (let i = 0; i < fecha.length; i++) {
+
+        today = moment().add(i, 'days');
+        ddToday = today.format(formato).padStart(2, '0');
+
+        // Primer filtro es para extraer todos los elementos que incluyen el valor de ddToday
+        filtro = response.list.filter((element) =>
+          element.dt_txt.includes(`-${ddToday}`)
         );
 
+        // Hacemos push al array para poder separar en cada indice de este los elementos con las mismas fechas
         arrayDivisionPorFechas.push(filtro);
       }
-    } else {
-      for (let i = 0; i < fecha.length; i++) {
-        tomorrow = Number(ddTomorrow) + i;
 
-        filtro = response.filter((element) =>
-          element.dt_txt.includes(`-${tomorrow}`)
+    } else {
+
+      console.log('Se ejecutó con tomorrow');
+      for (let i = 0; i < fecha.length; i++) {
+
+        tomorrow = tomorrow.add(i, 'days');
+        ddTomorrow = tomorrow.format(formato).padStart(2, '0');
+
+
+        filtro = response.list.filter((element) =>
+          element.dt_txt.includes(`-${ddTomorrow}`)
         );
 
         arrayDivisionPorFechas.push(filtro);
+
       }
     }
 
+    // Hacemos un map del primer indice de cada elemento del array valorFechaPrimeraVez
     let valorFechaPrimeraVez = arrayDivisionPorFechas.map(
       (element) => element[0]
     );
 
+    // Accedemos a la propiedad temp_max de cada elemento y lo mapeamos
     let temperatura = valorFechaPrimeraVez.map(
       (element) => element.main.temp_max
     );
 
+    // Hacemos la conversión a °C de cada elemento del array temperatura
     let temperaturaCelcius = valorFechaPrimeraVez.map(
       (element) => element.main.temp_max - 273.15
     );
-    console.log(fecha);
+
     console.log(temperaturaCelcius);
-    return { fecha, temperaturaCelcius };
+
+    return [fecha, temperaturaCelcius];
   });
 };
 
+
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {
-  console.log("maxTempsGraph Executed");
-  dataRefactoring(infoCity);
-  const graphTemp = new Chart(graph1, {
-    type: "bar",
-    data: {
-      labels: fecha,
-      datasets: [
-        {
-          label: `Temperatura ${infoCity[0]} en °C`,
-          data: temperaturaCelcius,
-          backgroundColor: ["rgba(54, 162, 235, 0.2)"],
-          borderColor: ["rgb(54, 162, 235)"],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
+
+  dataRefactoring(infoCity).then((response) => {
+
+    let fecha = response[0];
+    let temperaturaCelcius = response[1];
+    console.log(infoCity);
+
+    const graphTemp = new Chart(graph1, {
+      type: "bar",
+      data: {
+        labels: fecha,
+        datasets: [
+          {
+            label: `Temperatura ${infoCity.cityName} en °C`,
+            data: temperaturaCelcius,
+            backgroundColor: ["#fddb3a"],
+            borderColor: ["#fddb3a)"],
+            borderWidth: 1,
+          },
+        ],
       },
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: {
-            font: {
-              size: 14,
-              weight: 600,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 14,
+                weight: 600,
+              },
             },
           },
         },
       },
-    },
+    });
   });
+
 };
 
-export { maxTempsGraph };
+export { maxTempsGraph, graph1 };

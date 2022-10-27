@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,11 +17,16 @@
             <a href="">Ayuda</a>
           </div>
           <div class="nav-search">
-            <input type="text" id="ciudad" placeholder="Santiago..." />
+            <input
+              type="text"
+              id="ciudad"
+              placeholder="Santiago..."
+              value="Santiago"
+            />
             <div class="alert" role="alert">
               Porfavor complete el campo con una Ciudad
             </div>
-            <input type="text" id="pais" placeholder="CL..." />
+            <input type="text" id="pais" placeholder="CL..." value="cl" />
             <div class="alert2" role="alert">
               Porfavor complete el campo con el código del pais donde está la
               ciudad
@@ -47,13 +52,20 @@
           <div class="card">
             <canvas id="myChart2"></canvas>
           </div>
-          <div class="card"></div>
+          <div class="card">
+            <canvas id="myChart3"></canvas>
+          </div>
+          <div class="card">
+            <canvas id="myChart4"></canvas>
+          </div>
         </div>
       </div>
     </main>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
-    <script src="./script/index.js" type="module"></script>
-  </body>
+  <script src="./script/index.js" type="module"></script>
+</body>
+
 </html>
