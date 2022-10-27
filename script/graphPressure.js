@@ -1,130 +1,142 @@
-const graph4 = document.querySelector('#myChart4');
-const ciudad = document.querySelector('#ciudad');
-const pais = document.querySelector('#pais');
+//Elemento canvas de tarjeta que muestra la presión atmosférica
+const graph4 = document.querySelector("#myChart4");
 
-const inputData = () => {
+//----Obtenemos la informacion utilizando la api correspondiente----
+const getTempData = (infoCity) => {
 
-    let url = `http://api.openweathermap.org/geo/1.0/direct?q=${ciudad.value},${pais.value}&limit=1&appid=afa815d7eedd497bfe6a8d94b49ed7d2`;
-    return geocoderAPI(url);
-}
-
-const geocoderAPI = (url) => {
-
-
+    let lat = infoCity.lat;
+    let lon = infoCity.lon;
 
     return Promise.resolve(
 
-        fetch(url)
-            .then(respuesta => respuesta.json())
-    )
-}
+        fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
+        ).then((data) => data.json())
+
+    );
+};
+
+/*---- Tomamos informacion entregada por la api y exportamos la informacion
+correspondiente a las fechas y sus temperaturas para ese dia----*/
+const dataRefactoring = async (infoCity) => {
+
+    return await getTempData(infoCity).then((response) => {
+        console.log(response.list);
+
+        /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 
+        de los dias de las predicciones ----*/
+        let fecha = [
+            ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
+        ];
+
+        // Uso de la libreria MomentJS para trabajar con fechas
+        const formato = 'DD';
+
+        let today = moment();
+
+        let ddToday = today.format(formato).padStart(2, '0');
+
+        let tomorrow;
+        let ddTomorrow;
 
 
-const forecast5API = async (url) => {
+        let filtro;
+        let arrayDivisionPorFechas = [];
 
-    try {
+        // Esto es porque la api no está sincronizada con el horario local
+        if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
 
-        return await axios.get(url)
-            .then(data => data.data.list)
+            console.log('Se ejecutó con today');
+            for (let i = 0; i < fecha.length; i++) {
 
-    } catch (e) {
+                today = moment().add(i, 'days');
+                ddToday = today.format(formato).padStart(2, '0');
 
-        console.error(e);
-    }
-}
+                // Primer filtro es para extraer todos los elementos que incluyen el valor de ddToday
+                filtro = response.list.filter((element) =>
+                    element.dt_txt.includes(`-${ddToday}`)
+                );
 
-const graphForecast5Cuatro = () => {
+                // Hacemos push al array para poder separar en cada indice de este los elementos con las mismas fechas
+                arrayDivisionPorFechas.push(filtro);
+            }
 
-    let nombre;
-    let latLon;
-    let urlClima;
+        } else {
 
-    inputData()
-        .then(response => {
+            console.log('Se ejecutó con tomorrow');
+            for (let i = 0; i < fecha.length; i++) {
 
-            nombre = response[0].name;
-            latLon = [response[0].lat, response[0].lon];
-            urlClima = `https://api.openweathermap.org/data/2.5/forecast?lat=${latLon[0]}&lon=${latLon[1]}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`;
+                tomorrow = moment().add(i + 1, 'days');
+                ddTomorrow = tomorrow.format(formato).padStart(2, '0');
 
-            forecast5API(urlClima)
-                .then(response => {
 
-                    let fecha = [...new Set(response.map(element => element.dt_txt.split(' ')[0]))];
+                filtro = response.list.filter((element) =>
+                    element.dt_txt.includes(`-${ddTomorrow}`)
+                );
 
-                    let today = new Date();
-                    let ddToday = String(today.getDate()).padStart(2, '0');
+                arrayDivisionPorFechas.push(filtro);
 
-                    let tomorrow = new Date(today);
-                    tomorrow.setDate(today.getDate() + 1);
-                    let ddTomorrow = String(tomorrow.getDate()).padStart(2, '0');
+            }
+        }
 
-                    let filtro;
-                    let arrayDivisionPorFechas = [];
+        // Hacemos un map del primer indice de cada elemento del array valorFechaPrimeraVez
+        let valorFechaPrimeraVez = arrayDivisionPorFechas.map(
+            (element) => element[0]
+        );
 
-                    // Esto es porque la api no está sincronizada con el horario local
-                    if (response[0].dt_txt.split(' ')[0].includes(`-${ddToday}`)) {
+        // Accedemos a la propiedad pressure de cada elemento y lo mapeamos
+        let pressure = valorFechaPrimeraVez.map(
+            (element) => element.main.pressure
+        );
 
-                        for (let i = 0; i < fecha.length; i++) {
+        console.log(pressure);
 
-                            today = (Number(ddToday) + i);
+        return [fecha, pressure];
+    });
+};
 
-                            filtro = response.filter(element => element.dt_txt.includes(`-${today}`));
+//---- Generamos grafico con la informacion ya filtrada
+const pressureGraph = (infoCity) => {
 
-                            arrayDivisionPorFechas.push(filtro);
-                        }
-                    } else {
+    dataRefactoring(infoCity).then((response) => {
 
-                        for (let i = 0; i < fecha.length; i++) {
+        let fecha = response[0];
+        let pressure = response[1];
+        console.log(infoCity);
 
-                            tomorrow = (Number(ddTomorrow) + i);
-
-                            filtro = response.filter(element => element.dt_txt.includes(`-${tomorrow}`));
-
-                            arrayDivisionPorFechas.push(filtro);
-                        }
+        const graphPressure = new Chart(graph4, {
+            type: 'line',
+            data: {
+                labels: fecha,
+                datasets: [{
+                    label: `Presión Atmosférica (hPa) en ${infoCity.cityName}`,
+                    data: pressure,
+                    fill: true,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false
                     }
-
-                    let valorFechaPrimeraVez = arrayDivisionPorFechas.map(element => element[0]);
-
-                    let pressure = valorFechaPrimeraVez.map(element => element.main.pressure);
-
-                    const graphClima = new Chart(graph4, {
-                        type: 'doughnut',
-                        data: {
-                            labels: fecha,
-                            datasets: [{
-                                label: `Presión Atmosférica (hPa) en ${nombre}`,
-                                data: pressure,
-                                backgroundColor: [
-                                    'rgb(54, 162, 235)',
-                                    'rgb(35, 130, 205)'
-                                ],
-                                hoverOffset: 4
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            },
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    labels: {
-                                        font: {
-                                            size: 14,
-                                            weight: 600
-                                        }
-                                    }
-                                }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: 600
                             }
                         }
-                    });
-                })
-        })
+                    }
+                }
+            }
+        });
+    });
 
+};
 
-}
-
-export { graph4, graphForecast5Cuatro }
+export { graph4, pressureGraph }

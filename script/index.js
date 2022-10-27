@@ -1,6 +1,6 @@
 import { maxTempsGraph, graph1 } from "./graphTemp.js";
 import { windGraph, graph3 } from "./graphWind.js";
-// import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
+import { pressureGraph, graph4 } from "./graphPressure.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
 import { humidityGraph } from "./graphHumidity.js";
 
@@ -32,6 +32,7 @@ import { humidityGraph } from "./graphHumidity.js";
         maxTempsGraph(cityData);
         humidityGraph(cityData);
         windGraph(cityData);
+        pressureGraph(cityData);
       });
     } else if (
       cityInput.value !== "" &&
@@ -56,9 +57,9 @@ import { humidityGraph } from "./graphHumidity.js";
         Chart.getChart(graph3).destroy();
       }
 
-      // if (Chart.getChart(graph4)) {
-      //   Chart.getChart(graph4).destroy();
-      // }
+      if (Chart.getChart(graph4)) {
+        Chart.getChart(graph4).destroy();
+      }
 
       e.preventDefault();
       getCity().then((data) => {
@@ -66,6 +67,7 @@ import { humidityGraph } from "./graphHumidity.js";
         maxTempsGraph(cityData);
         humidityGraph(cityData);
         windGraph(cityData);
+        pressureGraph(cityData);
       });
     } else {
       document.querySelector(".alert").style.display = "block";
