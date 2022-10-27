@@ -12,7 +12,7 @@ const getTempData = (infoCity) => {
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
     ).then((data) => data.json())
-    
+
   );
 };
 
@@ -23,7 +23,7 @@ const dataRefactoring = async (infoCity) => {
   return await getTempData(infoCity).then((response) => {
     console.log(response.list);
 
-    /*---- Hacemos una coleccion de valores unicos con los valores de la pripiedad dt_txt que correponde a las fechas 
+    /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 
     de los dias de las predicciones ----*/
     let fecha = [
       ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
@@ -68,7 +68,7 @@ const dataRefactoring = async (infoCity) => {
       console.log('Se ejecutó con tomorrow');
       for (let i = 0; i < fecha.length; i++) {
 
-        tomorrow = tomorrow.add(1, 'days');
+        tomorrow = tomorrow.add(i, 'days');
         ddTomorrow = tomorrow.format(formato).padStart(2, '0');
 
 
