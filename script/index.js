@@ -2,10 +2,9 @@ import { maxTempsGraph, graph1 } from "./graphTemp.js";
 import { windGraph, graph3 } from "./graphWind.js";
 // import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
-
+import { humidityGraph } from "./graphHumidity.js";
 
 (function async() {
- 
   /*---- Variables que se van a usar para hacer la validaciones, si no están 
   definidas es porque la app se está usando por primera vez y se ejecuta el if, 
   si están definidas se ejecuta el else if para poder reutilizar los elementos canvas ----*/
@@ -31,9 +30,9 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
       getCity().then((data) => {
         let cityData = data;
         maxTempsGraph(cityData);
+        humidityGraph(cityData);
         windGraph(cityData);
       });
-
     } else if (
       cityInput.value !== "" &&
       ciudadInput !== undefined &&
@@ -65,6 +64,7 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
       getCity().then((data) => {
         let cityData = data;
         maxTempsGraph(cityData);
+        humidityGraph(cityData);
         windGraph(cityData);
       });
     } else {
