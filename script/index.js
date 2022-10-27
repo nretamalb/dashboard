@@ -1,9 +1,22 @@
+<<<<<<< Updated upstream
 import { maxTempsGraph } from "./graphTemp.js";
 import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
 import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
 import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
 import { getCity, cityData } from "./geocode.js";
 (function async() {
+=======
+import { maxTempsGraph, graph1 } from "./graphTemp.js";
+// import { windGraph, graph3 } from "./graphWind.js";
+// import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
+import { getCity, cityInput, countryInput } from "./geocode.js";
+import { humidityGraph } from "./graphHumidity.js";
+
+(function async() {
+  /*---- Variables que se van a usar para hacer la validaciones, si no están 
+  definidas es porque la app se está usando por primera vez y se ejecuta el if, 
+  si están definidas se ejecuta el else if para poder reutilizar los elementos canvas ----*/
+>>>>>>> Stashed changes
   let ciudadInput;
   let codigoPais;
 
@@ -23,11 +36,20 @@ import { getCity, cityData } from "./geocode.js";
       codigoPais = pais.value;
 
       e.preventDefault();
+<<<<<<< Updated upstream
       getCity();
       maxTempsGraph(cityData);
       graphForecast5Dos();
       graphForecast5Tres();
       graphForecast5Cuatro();
+=======
+      getCity().then((data) => {
+        let cityData = data;
+        maxTempsGraph(cityData);
+        // windGraph(cityData);
+        humidityGraph(cityData);
+      });
+>>>>>>> Stashed changes
     } else if (
       ciudad.value !== "" &&
       ciudadInput !== undefined &&
@@ -56,10 +78,19 @@ import { getCity, cityData } from "./geocode.js";
       }
 
       e.preventDefault();
+<<<<<<< Updated upstream
       graphForecast5Uno();
       graphForecast5Dos();
       graphForecast5Tres();
       graphForecast5Cuatro();
+=======
+      getCity().then((data) => {
+        let cityData = data;
+        maxTempsGraph(cityData);
+        // windGraph(cityData);
+        humidityGraph(cityData);
+      });
+>>>>>>> Stashed changes
     } else {
       document.querySelector(".alert").style.display = "block";
       document.querySelector(".alert2").style.display = "block";
