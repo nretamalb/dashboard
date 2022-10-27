@@ -22,12 +22,18 @@ const dataRefactoring = async (infoCity) => {
             ...new Set(response.list.map((element) => element.dt_txt.split(" ")[0]))
         ];
 
-        let today = new Date();
-        let ddToday = String(today.getDate()).padStart(2, "0");
+        // Uso de la libreria MomentJS para trabajar con fechas
+        const formato = 'DD'
 
-        let tomorrow = new Date(today);
-        tomorrow.setDate(today.getDate() + 1);
-        let ddTomorrow = String(tomorrow.getDate()).padStart(2, "0");
+        let today = moment();
+
+        let ddToday = String(today.format(formato)).padStart(2, "0");
+        console.log(ddToday);
+
+        let tomorrow = moment().add(1, 'days');
+        let ddTomorrow = String(tomorrow.format(formato)).padStart(2, "0");
+        console.log(ddTomorrow);
+
 
         let filtro;
         let arrayDivisionPorFechas = [];
@@ -36,11 +42,13 @@ const dataRefactoring = async (infoCity) => {
         if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
             console.log('Se ejecutó con today');
             for (let i = 0; i < fecha.length; i++) {
-                today = Number(ddToday) + i;
+                today = moment().add(i, 'days');
+                ddToday = today.format(formato);
+                // Primer filtro es para extraer todos los elementos que incluyen el valor de ddToday
                 filtro = response.list.filter((element) =>
-                    element.dt_txt.includes(`-${today}`)
+                    element.dt_txt.includes(`-${ddToday}`)
                 );
-
+                // Hacemos push al array para poder separar en cada indice de este los elementos con las mismas fechas
                 arrayDivisionPorFechas.push(filtro);
             }
         } else {
@@ -55,7 +63,7 @@ const dataRefactoring = async (infoCity) => {
                 arrayDivisionPorFechas.push(filtro);
             }
         }
-
+        // Hacemos un map del primer indice de cada elemento del array valorFechaPrimeraVez
         let valorFechaPrimeraVez = arrayDivisionPorFechas.map(
             (element) => element[0]
         );
