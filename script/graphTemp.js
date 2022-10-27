@@ -35,11 +35,10 @@ const dataRefactoring = async (infoCity) => {
     let today = moment();
 
     let ddToday = today.format(formato).padStart(2, '0');
-    console.log(ddToday);
 
-    let tomorrow = moment().add(1, 'days');
-    let ddTomorrow = tomorrow.format(formato).padStart(2, '0');
-    console.log(ddTomorrow);
+    // Se declaran las variables que se van a usar para la validación en else
+    let tomorrow;
+    let ddTomorrow;
 
 
     let filtro;
@@ -68,7 +67,7 @@ const dataRefactoring = async (infoCity) => {
       console.log('Se ejecutó con tomorrow');
       for (let i = 0; i < fecha.length; i++) {
 
-        tomorrow = tomorrow.add(i, 'days');
+        tomorrow = moment().add(i + 1, 'days');
         ddTomorrow = tomorrow.format(formato).padStart(2, '0');
 
 
