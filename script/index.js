@@ -1,15 +1,18 @@
 import { maxTempsGraph, graph1 } from "./graphTemp.js";
-import { graph2, graphForecast5Dos } from "./graphForecast5Dos.js";
-import { graph3, graphForecast5Tres } from "./graphForecast5Tres.js";
-import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
+// import { windGraph, graph3 } from "./graphWind.js";
+// import { graph4, graphForecast5Cuatro } from "./graphForecast5Cuatro.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
 
 
 (function async() {
+ 
+  /*---- Variables que se van a usar para hacer la validaciones, si no están 
+  definidas es porque la app se está usando por primera vez y se ejecuta el if, 
+  si están definidas se ejecuta el else if para poder reutilizar los elementos canvas ----*/
   let ciudadInput;
   let codigoPais;
 
-  const boton = document.querySelector("#boton");
+  const boton = document.getElementById("boton");
   boton.addEventListener("click", (e) => {
     if (
       cityInput.value !== "" &&
@@ -28,6 +31,7 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
       getCity().then((data) => {
         let cityData = data;
         maxTempsGraph(cityData);
+        // windGraph(cityData);
       });
 
     } else if (
@@ -53,14 +57,15 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
         Chart.getChart(graph3).destroy();
       }
 
-      if (Chart.getChart(graph4)) {
-        Chart.getChart(graph4).destroy();
-      }
+      // if (Chart.getChart(graph4)) {
+      //   Chart.getChart(graph4).destroy();
+      // }
 
       e.preventDefault();
       getCity().then((data) => {
         let cityData = data;
         maxTempsGraph(cityData);
+        // windGraph(cityData);
       });
     } else {
       document.querySelector(".alert").style.display = "block";
