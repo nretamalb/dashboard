@@ -2,7 +2,7 @@
 const graph4 = document.querySelector("#myChart4");
 
 //----Obtenemos la informacion utilizando la api correspondiente----
-const getTempData = (infoCity) => {
+const getPressureData = (infoCity) => {
 
     let lat = infoCity.lat;
     let lon = infoCity.lon;
@@ -20,7 +20,7 @@ const getTempData = (infoCity) => {
 correspondiente a las fechas y presión para ese dia----*/
 const dataRefactoring = async (infoCity) => {
 
-    return await getTempData(infoCity).then((response) => {
+    return await getPressureData(infoCity).then((response) => {
         console.log(response.list);
 
         /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 
@@ -33,7 +33,6 @@ const dataRefactoring = async (infoCity) => {
         const formato = 'DD';
 
         let today = moment();
-
         let ddToday = today.format(formato).padStart(2, '0');
 
         let tomorrow;

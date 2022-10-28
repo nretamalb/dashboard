@@ -1,4 +1,4 @@
-//----Elementos input de la pagina pagina----
+//----Elementos input de la página----
 let cityInput = document.getElementById("ciudad");
 let countryInput = document.getElementById("pais");
 //-----------------------------
@@ -19,7 +19,7 @@ const get = () => {
   //-----Tomar valores de ciudad desde el input------
   cityName = cityInput.value;
   countryName = countryInput.value;
-  //-----Aplicar valolres de input a url de la API-------
+  //-----Aplicar valores de input a url de la API-------
   url =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityName +

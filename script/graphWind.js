@@ -2,7 +2,7 @@
 const graph3 = document.querySelector("#myChart3");
 
 //----Obtenemos la informacion utilizando la api correspondiente----
-const getTempData = (infoCity) => {
+const getWindData = (infoCity) => {
 
     let lat = infoCity.lat;
     let lon = infoCity.lon;
@@ -20,7 +20,7 @@ const getTempData = (infoCity) => {
 correspondiente a las fechas y viento para ese dia----*/
 const dataRefactoring = async (infoCity) => {
 
-    return await getTempData(infoCity).then((response) => {
+    return await getWindData(infoCity).then((response) => {
         console.log(response.list);
 
         /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 

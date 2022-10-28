@@ -1,4 +1,4 @@
-//Elemento canvas de tarjeta que muestra temperaturas maximas
+//Elemento canvas de tarjeta que muestra la humedad relativa
 const graph2 = document.querySelector("#myChart2");
 
 //----Obtenemos la informacion utilizando la api correspondiente----
@@ -33,7 +33,6 @@ const dataRefactoring = async (infoCity) => {
     const formato = "DD";
 
     let today = moment();
-
     let ddToday = today.format(formato).padStart(2, "0");
 
     // Se declaran las variables que se van a usar para la validación en else
@@ -83,7 +82,7 @@ const dataRefactoring = async (infoCity) => {
       (element) => element[0]
     );
 
-    // Accedemos a la propiedad temp_max de cada elemento y lo mapeamos
+    // Accedemos a la propiedad humidity de cada elemento y lo mapeamos
     let humidity = valorFechaPrimeraVez.map((element) => element.main.humidity);
 
     return [fecha, humidity];
