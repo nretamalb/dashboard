@@ -17,7 +17,7 @@ let getHumidityData = (infoCity) => {
 };
 
 /*---- Tomamos informacion entregada por la api y exportamos la informacion
-correspondiente a las fechas y sus temperaturas para ese dia----*/
+correspondiente a las fechas y humedad para ese dia----*/
 const dataRefactoring = async (infoCity) => {
 
   return await getHumidityData(infoCity).then((response) => {
