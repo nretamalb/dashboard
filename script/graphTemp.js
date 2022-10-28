@@ -40,7 +40,6 @@ const dataRefactoring = async (infoCity) => {
     let tomorrow;
     let ddTomorrow;
 
-
     let filtro;
     let arrayDivisionPorFechas = [];
 
@@ -69,7 +68,6 @@ const dataRefactoring = async (infoCity) => {
 
         tomorrow = moment().add(i + 1, 'days');
         ddTomorrow = tomorrow.format(formato).padStart(2, '0');
-
 
         filtro = response.list.filter((element) =>
           element.dt_txt.includes(`-${ddTomorrow}`)
@@ -100,7 +98,6 @@ const dataRefactoring = async (infoCity) => {
     return [fecha, temperaturaCelcius];
   });
 };
-
 
 //---- Generamos grafico con la informacion ya filtrada
 const maxTempsGraph = (infoCity) => {

@@ -1,8 +1,8 @@
 import { maxTempsGraph, graph1 } from "./graphTemp.js";
+import { humidityGraph, graph2 } from "./graphHumidity.js";
 import { windGraph, graph3 } from "./graphWind.js";
 import { pressureGraph, graph4 } from "./graphPressure.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
-import { humidityGraph } from "./graphHumidity.js";
 
 (function async() {
   /*---- Variables que se van a usar para hacer la validaciones, si no están 
@@ -49,9 +49,9 @@ import { humidityGraph } from "./graphHumidity.js";
         Chart.getChart(graph1).destroy();
       }
 
-      // if (Chart.getChart(graph2)) {
-      //   Chart.getChart(graph2).destroy();
-      // }
+      if (Chart.getChart(graph2)) {
+        Chart.getChart(graph2).destroy();
+      }
 
       if (Chart.getChart(graph3)) {
         Chart.getChart(graph3).destroy();
