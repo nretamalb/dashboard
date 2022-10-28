@@ -21,7 +21,7 @@ const get = () => {
   countryName = countryInput.value;
   //-----Aplicar valores de input a url de la API-------
   url =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     cityName +
     "," +
     countryName +
