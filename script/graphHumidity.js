@@ -45,7 +45,7 @@ const dataRefactoring = async (infoCity) => {
 
     // Esto es porque la api no está sincronizada con el horario local
     if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
-      
+
       console.log("Se ejecutó con today");
       for (let i = 0; i < fecha.length; i++) {
 
