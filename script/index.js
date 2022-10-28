@@ -3,6 +3,7 @@ import { humidityGraph, graph2 } from "./graphHumidity.js";
 import { windGraph, graph3 } from "./graphWind.js";
 import { pressureGraph, graph4 } from "./graphPressure.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
+import { currentWeather } from "./weather-summary.js";
 
 (function async() {
   /*---- Variables que se van a usar para hacer las validaciones, si no están 
@@ -29,6 +30,7 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
       e.preventDefault();
       getCity().then((data) => {
         let cityData = data;
+        currentWeather(cityData);
         maxTempsGraph(cityData);
         humidityGraph(cityData);
         windGraph(cityData);
@@ -64,6 +66,7 @@ import { getCity, cityInput, countryInput } from "./geocode.js";
       e.preventDefault();
       getCity().then((data) => {
         let cityData = data;
+        currentWeather(cityData);
         maxTempsGraph(cityData);
         humidityGraph(cityData);
         windGraph(cityData);

@@ -3,26 +3,20 @@ const graph2 = document.querySelector("#myChart2");
 
 //----Obtenemos la informacion utilizando la api correspondiente----
 let getHumidityData = (infoCity) => {
-
   let lat = infoCity.lat;
   let lon = infoCity.lon;
 
   return Promise.resolve(
-
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=afa815d7eedd497bfe6a8d94b49ed7d2`
     ).then((data) => data.json())
-
   );
 };
 
 /*---- Tomamos informacion entregada por la api y exportamos la informacion
 correspondiente a las fechas y humedad para ese dia----*/
 const dataRefactoring = async (infoCity) => {
-
   return await getHumidityData(infoCity).then((response) => {
-    console.log(response.list);
-
     /*---- Hacemos una coleccion de valores unicos con los valores de la propiedad dt_txt que correponde a las fechas 
     de los dias de las predicciones ----*/
     let fecha = [
@@ -44,10 +38,7 @@ const dataRefactoring = async (infoCity) => {
 
     // Esto es porque la api no está sincronizada con el horario local
     if (response.list[0].dt_txt.split(" ")[0].includes(`-${ddToday}`)) {
-
-      console.log("Se ejecutó con today");
       for (let i = 0; i < fecha.length; i++) {
-
         today = moment().add(i, "days");
         ddToday = today.format(formato).padStart(2, "0");
 
@@ -59,12 +50,8 @@ const dataRefactoring = async (infoCity) => {
         // Hacemos push al array para poder separar en cada indice de este los elementos con las mismas fechas
         arrayDivisionPorFechas.push(filtro);
       }
-
     } else {
-
-      console.log("Se ejecutó con tomorrow");
       for (let i = 0; i < fecha.length; i++) {
-
         tomorrow = moment().add(i + 1, "days");
         ddTomorrow = tomorrow.format(formato).padStart(2, "0");
 
@@ -73,7 +60,6 @@ const dataRefactoring = async (infoCity) => {
         );
 
         arrayDivisionPorFechas.push(filtro);
-
       }
     }
 
@@ -91,9 +77,7 @@ const dataRefactoring = async (infoCity) => {
 
 //---- Generamos grafico con la informacion ya filtrada
 const humidityGraph = (infoCity) => {
-
   dataRefactoring(infoCity).then((response) => {
-
     let fecha = response[0];
     let humidity = response[1];
 

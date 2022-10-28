@@ -49,9 +49,8 @@ const getCity = async () => {
     cityName,
     countryName,
     lat,
-    lon
+    lon,
   };
-  console.log("cityData Executed");
   return cityData;
   //Creo un objeto con los valores obtenidos de respuesta y exporto
   //ese objeto para utilizarlo en index.js
