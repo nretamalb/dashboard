@@ -5,7 +5,7 @@ import { pressureGraph, graph4 } from "./graphPressure.js";
 import { getCity, cityInput, countryInput } from "./geocode.js";
 
 (function async() {
-  /*---- Variables que se van a usar para hacer la validaciones, si no están 
+  /*---- Variables que se van a usar para hacer las validaciones, si no están 
   definidas es porque la app se está usando por primera vez y se ejecuta el if, 
   si están definidas se ejecuta el else if para poder reutilizar los elementos canvas ----*/
   let ciudadInput;

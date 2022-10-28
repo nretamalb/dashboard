@@ -103,7 +103,7 @@ const windGraph = (infoCity) => {
         let fecha = response[0];
         let windKmH = response[1];
         console.log(infoCity);
-        
+
         const graphWind = new Chart(graph3, {
             type: 'line',
             data: {
