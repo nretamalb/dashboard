@@ -1,3 +1,12 @@
+/*
+Color Pallet
+#272727
+#f6f4e6
+#fddb3a
+#A41623
+#F85E00
+*/
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 * {
   padding: 0;
@@ -81,4 +90,25 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 10px;
+}
+.input {
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: 4px solid #ffd52d;
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 26px;
+  color: #ffd52d;
+  outline: none;
+  transition: 0.5s;
+}
+.nav-search {
+  position: relative;
+}
+.nav-search:hover input {
+  width: 250px;
+  background: #3b3640;
+  border-radius: 10px;
 }
