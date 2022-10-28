@@ -98,7 +98,6 @@ const maxTempsGraph = (infoCity) => {
             label: `Temperatura ${infoCity.cityName} en °C`,
             data: temperaturaCelcius,
             backgroundColor: ["#fddb3a"],
-            borderColor: ["#fddb3a)"],
             borderWidth: 1,
           },
         ],

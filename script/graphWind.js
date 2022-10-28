@@ -93,7 +93,7 @@ const windGraph = (infoCity) => {
             label: `Viento (km/h) en ${infoCity.cityName}`,
             data: windKmH,
             fill: true,
-            borderColor: "rgb(75, 192, 192)",
+            borderColor: "#fddb3a",
             tension: 0.1,
           },
         ],

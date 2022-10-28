@@ -90,7 +90,7 @@ const humidityGraph = (infoCity) => {
             label: `Humedad relativa (%) en ${infoCity.cityName}`,
             data: humidity,
             fill: true,
-            borderColor: "rgb(75, 192, 192)",
+            borderColor: "#fddb3a",
             tension: 0.1,
           },
         ],

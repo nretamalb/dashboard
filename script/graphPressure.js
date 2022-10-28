@@ -81,7 +81,7 @@ const pressureGraph = (infoCity) => {
     let pressure = response[1];
 
     const graphPressure = new Chart(graph4, {
-      type: "line",
+      type: "bar",
       data: {
         labels: fecha,
         datasets: [
@@ -89,7 +89,7 @@ const pressureGraph = (infoCity) => {
             label: `Presión Atmosférica (hPa) en ${infoCity.cityName}`,
             data: pressure,
             fill: true,
-            borderColor: "rgb(75, 192, 192)",
+            backgroundColor: "#fddb3a",
             tension: 0.1,
           },
         ],
@@ -97,7 +97,7 @@ const pressureGraph = (infoCity) => {
       options: {
         scales: {
           y: {
-            beginAtZero: false,
+            beginAtZero: true,
           },
         },
         responsive: true,

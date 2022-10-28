@@ -16,7 +16,7 @@
           <div class="nav-menu">
             <a href="#">Inicio</a>
             <a href="#">Contacto</a>
-            <a href="">Ayuda</a>
+            <a href="#">Ayuda</a>
           </div>
           <div class="nav-search">
             <input
@@ -26,13 +26,13 @@
               placeholder="Santiago..."
             />
             <div class="alert" role="alert">
-              Porfavor complete el campo con una Ciudad
+              Porfavor complete los campos
             </div>
             <input type="text" id="pais" class="input" placeholder="CL..." />
-            <div class="alert2" role="alert">
+            <!-- <div class="alert2" role="alert">
               Porfavor complete el campo con el código del pais donde está la
               ciudad
-            </div>
+            </div> -->
             <button id="boton">Buscar</button>
           </div>
         </div>
@@ -40,14 +40,11 @@
     </header>
     <main>
       <div class="dashboard-container" id="data">
+        <div class="weather-summary">
+          <h2 class="city-name"></h2>
+          <p class="city-temperature"></p>
+        </div>
         <div class="dashboard">
-          <div class="card">
-            <div class="weather-summary">
-              <h2 class="city-name"></h2>
-              <p class="city-temperature"></p>
-            </div>
-            <div class="weather-image"></div>
-          </div>
           <div class="card">
             <canvas id="myChart1"></canvas>
           </div>
