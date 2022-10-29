@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" type="image/x-icon" />
-    <link rel="stylesheet" href="./style/style.css" />
-    <title>Dashboard</title>
-  </head>
 
-  <body>
-    <header>
-      <nav class="nav-container">
-        <div class="nav-bar">
-          <div class="nav-menu">
-            <a href="#">Inicio</a>
-            <a href="#">Contacto</a>
-            <a href="#">Ayuda</a>
-          </div>
-          <div class="nav-search">
-            <input
-              type="text"
-              id="ciudad"
-              class="input"
-              placeholder="Santiago..."
-            />
-            <div class="alert" role="alert">
-              Porfavor complete los campos
-            </div>
-            <input type="text" id="pais" class="input" placeholder="CL..." />
-            <!-- <div class="alert2" role="alert">
-              Porfavor complete el campo con el código del pais donde está la
-              ciudad
-            </div> -->
-            <button id="boton">Buscar</button>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="#" type="image/x-icon" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <header>
+    <nav class="nav-container">
+      <div class="nav-bar">
+        <div class="nav-menu">
+          <a href="#">Inicio</a>
+          <a href="#">Contacto</a>
+          <a href="#">Ayuda</a>
         </div>
-      </nav>
-    </header>
-    <main>
-      <div class="dashboard-container" id="data">
-        <div class="weather-summary">
-          <h2 class="city-name"></h2>
-          <p class="city-temperature"></p>
-        </div>
-        <div class="dashboard">
-          <div class="card">
-            <canvas id="myChart1"></canvas>
+        <div class="nav-search">
+          <input type="text" id="ciudad" class="input" placeholder="Santiago..." />
+          <div class="alert" role="alert">
+            Porfavor complete los campos
           </div>
-          <div class="card">
-            <canvas id="myChart2"></canvas>
-          </div>
-          <div class="card">
-            <canvas id="myChart3"></canvas>
-          </div>
-          <div class="card">
-            <canvas id="myChart4"></canvas>
-          </div>
+          <input type="text" id="pais" class="input" placeholder="CL..." />
+          <button id="boton">Buscar</button>
         </div>
       </div>
-    </main>
-    <footer>
+    </nav>
+  </header>
+  <main>
+    <div id="h1">
+      <h1>Pronóstico del tiempo</h1>
+      <p id="p-h1">Busca el pronóstico de la ciudad que quieras cuándo quieras</p>
+    </div>
+    <div class="dashboard-container" id="data">
+      <div class="weather-summary">
+        <h2 class="city-name"></h2>
+        <p class="city-temperature"></p>
+      </div>
+      <div class="dashboard">
+        <div class="card">
+          <canvas id="myChart1"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart2"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart3"></canvas>
+        </div>
+        <div class="card">
+          <canvas id="myChart4"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>
       Creado por Franco Odone y Nicolás Retamal <br />
-      Todos los derechos reservados
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+      Todos los derechos reservados.
+    </p>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
-    <script src="./script/index.js" type="module"></script>
-  </body>
+  <script src="./script/index.js" type="module"></script>
+</body>
+
 </html>

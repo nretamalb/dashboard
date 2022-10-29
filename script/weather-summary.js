@@ -13,11 +13,11 @@ function currentWeather(infoCity) {
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=cb6ea339cd642c30d5f67cb1f287b8ee`
     ).then(data => data.json())
-    .then((data) => {
-      let temp = data.main.temp - 273;
-      currentTemperature.innerHTML = temp.toFixed(0) + "ºC";
-      city.innerHTML = myCity;
-    })
+      .then((data) => {
+        let temp = data.main.temp - 273;
+        currentTemperature.innerHTML = temp.toFixed(0) + "ºC";
+        city.innerHTML = myCity;
+      })
   );
 }
 

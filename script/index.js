@@ -21,7 +21,6 @@ import { currentWeather } from "./weather-summary.js";
       codigoPais === undefined
     ) {
       document.querySelector(".alert").style.display = "none";
-      // document.querySelector(".alert2").style.display = "none";
       document.querySelector("#data").style.display = "block";
 
       ciudadInput = ciudad.value;
@@ -43,7 +42,6 @@ import { currentWeather } from "./weather-summary.js";
       codigoPais !== undefined
     ) {
       document.querySelector(".alert").style.display = "none";
-      // document.querySelector(".alert2").style.display = "none";
       document.querySelector("#data").style.display = "block";
 
       // here myChart is the id of canvas
@@ -74,7 +72,6 @@ import { currentWeather } from "./weather-summary.js";
       });
     } else {
       document.querySelector(".alert").style.display = "block";
-      // document.querySelector(".alert2").style.display = "block";
       document.querySelector("#data").style.display = "none";
     }
   });

@@ -88,9 +88,8 @@ const pressureGraph = (infoCity) => {
           {
             label: `Presión Atmosférica (hPa) en ${infoCity.cityName}`,
             data: pressure,
-            fill: true,
             backgroundColor: "#fddb3a",
-            tension: 0.1,
+            borderWidth: 1,
           },
         ],
       },
