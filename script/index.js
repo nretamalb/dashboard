@@ -27,6 +27,7 @@ import { currentWeather } from "./weather-summary.js";
       codigoPais = pais.value;
 
       e.preventDefault();
+
       getCity().then((data) => {
         let cityData = data;
         currentWeather(cityData);
@@ -62,6 +63,7 @@ import { currentWeather } from "./weather-summary.js";
       }
 
       e.preventDefault();
+
       getCity().then((data) => {
         let cityData = data;
         currentWeather(cityData);
